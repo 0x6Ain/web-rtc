@@ -1,0 +1,30 @@
+{
+  "name": "web-rtc",
+  "version": "1.0.0",
+  "description": "WebRTC 기반 스트리밍 시스템",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "wrtc"
+    ]
+  },
+  "scripts": {
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev": "concurrently -n \"backend,frontend\" -c \"blue,green\" --raw \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\"",
+    "dev:no-ngrok": "pnpm --parallel --filter backend --filter frontend dev",
+    "build:frontend": "pnpm --filter frontend build",
+    "start:frontend": "pnpm --filter frontend start",
+    "start:frontend:1": "pnpm --filter frontend start -- --port 5173",
+    "start:frontend:2": "pnpm --filter frontend start -- --port 5200",
+    "ngrok": "ngrok http 5173"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.10",
+    "concurrently": "^9.2.1"
+  }
+}
